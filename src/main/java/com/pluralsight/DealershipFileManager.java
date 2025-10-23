@@ -4,10 +4,10 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 
 public class DealershipFileManager {
-    public static Dealership loadInventory(String fileName) {
+    public static Dealership getDealership() {
         try {
             Dealership dealership;
-            BufferedReader reader = new BufferedReader(new FileReader(fileName));
+            BufferedReader reader = new BufferedReader(new FileReader("inventory.csv"));
             String line;
             line = reader.readLine();
             String[] dealershipArray = line.split("\\|");
