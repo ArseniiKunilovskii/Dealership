@@ -57,5 +57,15 @@ public class Dealership {
         }
         return vehicles;
     }
+    public ArrayList<Vehicle> getVehiclesByType(String type){
+        ArrayList<Vehicle> vehicles = new ArrayList<>();
+        for (Vehicle vehicle : inventory) {
+            String curType = vehicle.getVehicleType();
+            if (curType.equalsIgnoreCase(type)) {
+                vehicles.add(vehicle);
+            }
+        }
+        return vehicles;
+    }
 
 }
