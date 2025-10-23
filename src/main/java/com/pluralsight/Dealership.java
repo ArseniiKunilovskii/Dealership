@@ -67,5 +67,8 @@ public class Dealership {
         }
         return vehicles;
     }
+    public ArrayList<Vehicle> getAllVehicles(){
+        return inventory;
+    }
 
 }
