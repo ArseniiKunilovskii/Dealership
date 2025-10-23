@@ -37,4 +37,15 @@ public class Dealership {
         return vehicles;
     }
 
+    public ArrayList<Vehicle> getVehiclesByYear(int year){
+        ArrayList<Vehicle> vehicles = new ArrayList<>();
+        for (Vehicle vehicle : inventory) {
+            int curYear = vehicle.getYear();
+            if (curYear==year) {
+                vehicles.add(vehicle);
+            }
+        }
+        return vehicles;
+    }
+
 }
