@@ -1,7 +1,10 @@
 package com.pluralsight;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.util.Scanner;
 
 public class DealershipFileManager {
     public static Dealership getDealership() {
@@ -27,6 +30,14 @@ public class DealershipFileManager {
         return null;
     }
     public void saveDealership(Dealership dealership){
+        try {
+            Scanner in = new Scanner(System.in);
+            BufferedWriter writer = new BufferedWriter(new FileWriter("inventory.csv", true));
+
+            writer.close();
+        } catch (Exception e){
+            System.out.println("File inventory is not found");
+        }
 
     }
 }

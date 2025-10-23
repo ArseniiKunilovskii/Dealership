@@ -107,9 +107,41 @@ public class UserInterface {
         displayVehicles(dealership.getAllVehicles());
     }
     public void  processGetByAddVehicleRequest(){
-
+        System.out.println("Please enter vin");
+        int vin = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Please enter year");
+        int year = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Please enter make");
+        String make = scanner.nextLine();
+        System.out.println("Please enter model");
+        String model = scanner.nextLine();
+        System.out.println("Please enter type");
+        String type = scanner.nextLine();
+        System.out.println("Please enter color");
+        String color = scanner.nextLine();
+        System.out.println("Please enter mileage");
+        int mileage = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Please enter price");
+        double price = scanner.nextDouble();
+        scanner.nextLine();
+        dealership.addVehicle(new Vehicle(vin, year,make,model,type,color,mileage,price));
+        System.out.println(make+model+ " has been added");
     }
-    public void  processGetByRemoveVehicleRequest(){}
+    public void  processGetByRemoveVehicleRequest(){
+        System.out.println("Please enter the vin of car that you want to remove");
+        int vin = scanner.nextInt();
+        scanner.nextLine();
+        for (Vehicle vehicle: dealership.getAllVehicles()){
+            if(vehicle.getVin()==vin){
+                System.out.println(vehicle.getMake()+ vehicle.getModel()+ " has been removed");
+                dealership.removeVehicle(vehicle);
+                break;
+            }
+        }
+    }
 
     private void displayVehicles(ArrayList<Vehicle> vehicles){
         for(Vehicle vehicle: vehicles) {
