@@ -10,7 +10,7 @@ public class DealershipFileManager {
     public static Dealership getDealership() {
         try {
             Dealership dealership;
-            BufferedReader reader = new BufferedReader(new FileReader("inventory.csv"));
+            BufferedReader reader = new BufferedReader(new FileReader("dealership.csv"));
             String line;
             line = reader.readLine();
             String[] dealershipArray = line.split("\\|");
@@ -32,14 +32,14 @@ public class DealershipFileManager {
     public static void saveDealership(Dealership dealership){
         try {
             Scanner in = new Scanner(System.in);
-            BufferedWriter writer = new BufferedWriter(new FileWriter("inventory.csv"));
+            BufferedWriter writer = new BufferedWriter(new FileWriter("dealership.csv"));
             writer.write(dealership.getName()+"|"+dealership.getAddress()+"|"+dealership.getPhone());
             for(Vehicle vehicle:dealership.getAllVehicles()){
-                writer.write(vehicle.getVin()+"|"+vehicle.getYear()+"|"+vehicle.getMake()+"|"+vehicle.getModel()+"|"+vehicle.getVehicleType()+"|"+vehicle.getColor()+"|"+vehicle.getOdometer()+"|"+vehicle.getPrice());
+                writer.write("\n"+vehicle.getVin()+"|"+vehicle.getYear()+"|"+vehicle.getMake()+"|"+vehicle.getModel()+"|"+vehicle.getVehicleType()+"|"+vehicle.getColor()+"|"+vehicle.getOdometer()+"|"+vehicle.getPrice());
             }
             writer.close();
         } catch (Exception e){
-            System.out.println("File inventory is not found");
+            System.out.println("File dealership.csv is not found");
         }
 
     }
