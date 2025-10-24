@@ -29,7 +29,7 @@ public class DealershipFileManager {
         }
         return null;
     }
-    public void saveDealership(Dealership dealership){
+    public static void saveDealership(Dealership dealership){
         try {
             Scanner in = new Scanner(System.in);
             BufferedWriter writer = new BufferedWriter(new FileWriter("inventory.csv"));

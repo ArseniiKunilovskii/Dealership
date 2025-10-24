@@ -10,10 +10,7 @@ public class UserInterface {
     }
     public void display(){
         init();
-        boolean done = false;
-
         // Main menu loop
-
         int choice = -1;
         while (choice != 99) {
             System.out.println("\nWelcome to the Online Store!");
@@ -70,7 +67,7 @@ public class UserInterface {
     }
     public void  processGetByMakeModelRequest(){
         System.out.println("What is your make?");
-        String make = scanner.nextLine();;
+        String make = scanner.nextLine();
 
         System.out.println("What is your model?");
         String model = scanner.nextLine();
@@ -91,11 +88,15 @@ public class UserInterface {
         displayVehicles(dealership.getVehiclesByColor(color));
     }
     public void  processGetByMileageRequest(){
-        System.out.println("What is your mileage?");
-        int year = scanner.nextInt();
+        System.out.println("What is your minimum mileage?");
+        int min = scanner.nextInt();
         scanner.nextLine();
 
-        displayVehicles(dealership.getVehiclesByYear(year));
+        System.out.println("What is your maximum mileage?");
+        int max = scanner.nextInt();
+        scanner.nextLine();
+
+        displayVehicles(dealership.getVehiclesByMileage(min,max));
     }
     public void  processGetByVehicleTypeRequest(){
         System.out.println("What is your type?");
@@ -128,6 +129,7 @@ public class UserInterface {
         double price = scanner.nextDouble();
         scanner.nextLine();
         dealership.addVehicle(new Vehicle(vin, year,make,model,type,color,mileage,price));
+        DealershipFileManager.saveDealership(dealership);
         System.out.println(make+model+ " has been added");
     }
     public void  processGetByRemoveVehicleRequest(){
@@ -138,15 +140,24 @@ public class UserInterface {
             if(vehicle.getVin()==vin){
                 System.out.println(vehicle.getMake()+ vehicle.getModel()+ " has been removed");
                 dealership.removeVehicle(vehicle);
+                DealershipFileManager.saveDealership(dealership);
                 break;
             }
         }
     }
 
     private void displayVehicles(ArrayList<Vehicle> vehicles){
-        for(Vehicle vehicle: vehicles) {
-            String outputFormat = "| %-8d | %-6d | %-10s | %-15s | %-15s | %-10s | %8d | $%,12.2f |%n";
-            System.out.printf(outputFormat, vehicle.getVin(), vehicle.getYear(), vehicle.getMake(), vehicle.getModel(), vehicle.getVehicleType(), vehicle.getColor(), vehicle.getOdometer(), vehicle.getPrice());
+        String headFormat = "| %-8s | %-6s | %-10s | %-15s | %-15s | %-10s | %8s | %12s  |%n";
+        String outputFormat = "| %-8d | %-6d | %-10s | %-15s | %-15s | %-10s | %8d | $%,12.2f |%n";
+        if(!vehicles.isEmpty()) {
+            System.out.println("======================================================================================================================");
+            System.out.printf(headFormat, "Vin", "Year", "Make", "Model", "Type", "Color", "Odometer", "Price");
+            for (Vehicle vehicle : vehicles) {
+                System.out.printf(outputFormat, vehicle.getVin(), vehicle.getYear(), vehicle.getMake(), vehicle.getModel(), vehicle.getVehicleType(), vehicle.getColor(), vehicle.getOdometer(), vehicle.getPrice());
+            }
+            System.out.println("======================================================================================================================");
+        }else {
+            System.out.println("\nSorry there is nothing that satisfies those parameters!");
         }
     }
 }
