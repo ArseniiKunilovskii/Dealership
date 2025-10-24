@@ -32,8 +32,11 @@ public class DealershipFileManager {
     public void saveDealership(Dealership dealership){
         try {
             Scanner in = new Scanner(System.in);
-            BufferedWriter writer = new BufferedWriter(new FileWriter("inventory.csv", true));
-
+            BufferedWriter writer = new BufferedWriter(new FileWriter("inventory.csv"));
+            writer.write(dealership.getName()+"|"+dealership.getAddress()+"|"+dealership.getPhone());
+            for(Vehicle vehicle:dealership.getAllVehicles()){
+                writer.write(vehicle.getVin()+"|"+vehicle.getYear()+"|"+vehicle.getMake()+"|"+vehicle.getModel()+"|"+vehicle.getVehicleType()+"|"+vehicle.getColor()+"|"+vehicle.getOdometer()+"|"+vehicle.getPrice());
+            }
             writer.close();
         } catch (Exception e){
             System.out.println("File inventory is not found");
